@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Brand {
+  id      Int      @id @default(autoincrement())
+  name    String
+  uniqueId  String?
+  uniqueId2 String?
+  position  Int
+  isPopular Boolean
+}
+
+model Device {
+  id      Int      @id @default(autoincrement())
+  name  String
+  uniqueId  String?
+  image String?
+  description String?
+  position  Int
+  price Decimal
+  RAM String?
+  network String?
+  externalModel1  String?
+  externalModel2  String?
+  isLatest  Boolean
+  brandUniqueId String?
+  brandName String?
+  isDeleted Boolean
+  brandId Int
+}
