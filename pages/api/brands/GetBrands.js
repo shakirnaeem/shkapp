@@ -25,6 +25,6 @@ export default async function handler(req, res) {
         const brands = await prisma.brand.findMany()
         res.status(200).json(brands);   
     } catch (error) {
-        res.status(200).error(error)
+        res.status(200).json(error)
     }
 }
