@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://shakirnaeem77:Khan1990Subha@pakmobilezone.com/pzdb"
+  url      = "mysql://shakirnaeem77:Khan1990Subhan@pakmobilezone.com/pzdb"
 }
 
 generator client {
