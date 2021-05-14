@@ -23,8 +23,8 @@ export default async function handler(req, res) {
     // }
     try {
         const prisma = new PrismaClient()
-        //const brands = await prisma.brand.findMany()
-        res.status(200).json({ name: 'shakir'});   
+        const brands = await prisma.brand.findMany()
+        res.status(200).json({ name: 'shakir naeem'});   
     } catch (error) {
         res.send(error)
     }
