@@ -1,7 +1,7 @@
 const { PrismaClient } = require('@prisma/client')
 
 export default async function handler(req, res) {
-    //const prisma = new PrismaClient()
+    const prisma = new PrismaClient()
 
     // const resData = await fetch(`https://service.pakmobilezone.com/api/Brands`)
     // const dataAll = await resData.json()
@@ -20,12 +20,7 @@ export default async function handler(req, res) {
     //             })
     //         }
     //     }
-    // }
-    try {
-        const prisma = new PrismaClient()
+    // }    
         const brands = await prisma.brand.findMany()
         res.send(brands);   
-    } catch (error) {
-        res.send(error)
-    }
 }

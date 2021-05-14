@@ -1,40 +1,37 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider = "mysql"
-  url      = "mysql://shakirnaeem77:Khan1990Subhan@pakmobilezone.com/pzdb"
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model Brand {
-  id      Int      @id @default(autoincrement())
-  name    String
+  id        Int      @id @default(autoincrement())
+  name      String
   uniqueId  String?
   uniqueId2 String?
   position  Int
   isPopular Boolean
-  isDeleted Boolean
+  isDeleted Boolean?
 }
 
 model Device {
-  id      Int      @id @default(autoincrement())
-  name  String
-  uniqueId  String?
-  image String?
-  description String?
-  position  Int
-  price Decimal
-  RAM String?
-  network String?
-  externalModel1  String?
-  externalModel2  String?
-  isLatest  Boolean
-  brandUniqueId String?
-  brandName String?
-  isDeleted Boolean
-  brandId Int
+  id             Int     @id @default(autoincrement())
+  name           String
+  uniqueId       String?
+  image          String?
+  description    String?
+  position       Int
+  price          Decimal
+  RAM            String?
+  network        String?
+  externalModel1 String?
+  externalModel2 String?
+  isLatest       Boolean
+  brandUniqueId  String?
+  brandName      String?
+  isDeleted      Boolean
+  brandId        Int
 }
