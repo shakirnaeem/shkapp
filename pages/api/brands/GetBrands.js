@@ -21,10 +21,6 @@ export default async function handler(req, res) {
     //         }
     //     }
     // }    
-        const brands = await prisma.brand.findMany({
-            where: {
-                id: 20
-            }
-        })
+        const brands = await prisma.brand.findMany()
         res.send(brands);   
 }
