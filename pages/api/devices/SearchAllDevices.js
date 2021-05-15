@@ -1,7 +1,7 @@
-const { PrismaClient } = require('@prisma/client')
+import { connectToDatabase } from "../../../util/mongodb";
 
 export default async function handler(req, res) {
-    const prisma = new PrismaClient()
+    //const prisma = new PrismaClient()
 
 
 
@@ -36,11 +36,18 @@ export default async function handler(req, res) {
 
     //await prisma.device.deleteMany();
 
-    const devices = await prisma.device.findMany({
-        select: {
-            id: true,
-            name: true,
-        },
-    })
+    // const devices = await prisma.device.findMany({
+    //     select: {
+    //         id: true,
+    //         name: true,
+    //     },
+    // })
+
+    const { db } = await connectToDatabase();
+    const devices = await db
+        .collection("devices")
+        .find()
+        .sort({ metacritic: -1 })
+        .toArray();
     res.status(200).json(devices);
 }
