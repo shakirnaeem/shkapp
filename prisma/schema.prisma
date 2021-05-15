@@ -1,37 +1,253 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["microsoftSqlServer"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlserver"
   url      = env("DATABASE_URL")
 }
 
-model Brand {
-  id        Int      @id @default(autoincrement())
-  name      String
-  uniqueId  String?
-  uniqueId2 String?
-  position  Int
-  isPopular Boolean
-  isDeleted Boolean?
+model EFMigrationsHistory {
+  MigrationId    String @id @db.NVarChar(150)
+  ProductVersion String @db.NVarChar(32)
+
+  @@map("__EFMigrationsHistory")
 }
 
-model Device {
-  id             Int     @id @default(autoincrement())
-  name           String
-  uniqueId       String?
-  image          String?
-  description    String?
-  position       Int
-  price          Decimal
-  RAM            String?
-  network        String?
-  externalModel1 String?
-  externalModel2 String?
-  isLatest       Boolean
-  brandUniqueId  String?
-  brandName      String?
-  isDeleted      Boolean
-  brandId        Int
+model AspNetRoleClaims {
+  Id          Int         @id @default(autoincrement())
+  RoleId      String      @db.NVarChar(450)
+  ClaimType   String?     @db.NVarChar(Max)
+  ClaimValue  String?     @db.NVarChar(Max)
+  AspNetRoles AspNetRoles @relation(fields: [RoleId], references: [Id])
+}
+
+model AspNetRoles {
+  Id               String             @id @db.NVarChar(450)
+  Name             String?            @db.NVarChar(256)
+  NormalizedName   String?            @db.NVarChar(256)
+  ConcurrencyStamp String?            @db.NVarChar(Max)
+  AspNetRoleClaims AspNetRoleClaims[]
+  AspNetUserRoles  AspNetUserRoles[]
+}
+
+model AspNetUserClaims {
+  Id          Int         @id @default(autoincrement())
+  UserId      String      @db.NVarChar(450)
+  ClaimType   String?     @db.NVarChar(Max)
+  ClaimValue  String?     @db.NVarChar(Max)
+  AspNetUsers AspNetUsers @relation(fields: [UserId], references: [Id])
+}
+
+model AspNetUserLogins {
+  LoginProvider       String      @db.NVarChar(450)
+  ProviderKey         String      @db.NVarChar(450)
+  ProviderDisplayName String?     @db.NVarChar(Max)
+  UserId              String      @db.NVarChar(450)
+  AspNetUsers         AspNetUsers @relation(fields: [UserId], references: [Id])
+
+  @@id([LoginProvider, ProviderKey])
+}
+
+model AspNetUserRoles {
+  UserId      String      @db.NVarChar(450)
+  RoleId      String      @db.NVarChar(450)
+  AspNetRoles AspNetRoles @relation(fields: [RoleId], references: [Id])
+  AspNetUsers AspNetUsers @relation(fields: [UserId], references: [Id])
+
+  @@id([UserId, RoleId])
+}
+
+model AspNetUsers {
+  Id                   String             @id @db.NVarChar(450)
+  UserName             String?            @db.NVarChar(256)
+  NormalizedUserName   String?            @db.NVarChar(256)
+  Email                String?            @db.NVarChar(256)
+  NormalizedEmail      String?            @db.NVarChar(256)
+  EmailConfirmed       Boolean
+  PasswordHash         String?            @db.NVarChar(Max)
+  SecurityStamp        String?            @db.NVarChar(Max)
+  ConcurrencyStamp     String?            @db.NVarChar(Max)
+  PhoneNumber          String?            @db.NVarChar(Max)
+  PhoneNumberConfirmed Boolean
+  TwoFactorEnabled     Boolean
+  LockoutEnd           DateTime?          @db.DateTimeOffset
+  LockoutEnabled       Boolean
+  AccessFailedCount    Int
+  AspNetUserClaims     AspNetUserClaims[]
+  AspNetUserLogins     AspNetUserLogins[]
+  AspNetUserRoles      AspNetUserRoles[]
+  AspNetUserTokens     AspNetUserTokens[]
+}
+
+model AspNetUserTokens {
+  UserId        String      @db.NVarChar(450)
+  LoginProvider String      @db.NVarChar(450)
+  Name          String      @db.NVarChar(450)
+  Value         String?     @db.NVarChar(Max)
+  AspNetUsers   AspNetUsers @relation(fields: [UserId], references: [Id])
+
+  @@id([UserId, LoginProvider, Name])
+}
+
+model Brands {
+  Id         Int       @id @default(autoincrement())
+  CreateDate DateTime
+  CreateId   Int
+  ModifyDate DateTime?
+  ModifyId   Int?
+  IsDeleted  Boolean
+  Name       String?   @db.NVarChar(Max)
+  UniqueId   String    @unique @db.NVarChar(450)
+  Position   Int
+  IsPopular  Boolean
+  UniqueId2  String?   @db.NVarChar(Max)
+  Devices    Devices[]
+}
+
+model DeviceDetails {
+  Id                      Int       @id @default(autoincrement())
+  CreateDate              DateTime
+  CreateId                Int
+  ModifyDate              DateTime?
+  ModifyId                Int?
+  IsDeleted               Boolean
+  BrandUniqueId           String?   @db.NVarChar(Max)
+  Name                    String?   @db.NVarChar(Max)
+  UniqueId                String?   @db.NVarChar(Max)
+  ImageLink               String?   @db.NVarChar(Max)
+  Comments                String?   @db.NVarChar(Max)
+  NetworkTechnology       String?   @db.NVarChar(Max)
+  Network2G               String?   @db.NVarChar(Max)
+  Network3G               String?   @db.NVarChar(Max)
+  Network4G               String?   @db.NVarChar(Max)
+  Network5G               String?   @db.NVarChar(Max)
+  NetworkSpeed            String?   @db.NVarChar(Max)
+  LaunchYear              String?   @db.NVarChar(Max)
+  Status                  String?   @db.NVarChar(Max)
+  Dimensions              String?   @db.NVarChar(Max)
+  Weight                  String?   @db.NVarChar(Max)
+  Build                   String?   @db.NVarChar(Max)
+  SimSituation            String?   @db.NVarChar(Max)
+  BodyOther               String?   @db.NVarChar(Max)
+  DisplayType             String?   @db.NVarChar(Max)
+  DisplaySize             String?   @db.NVarChar(Max)
+  Resolution              String?   @db.NVarChar(Max)
+  DisplayProtection       String?   @db.NVarChar(Max)
+  DisplayOther            String?   @db.NVarChar(Max)
+  OS                      String?   @db.NVarChar(Max)
+  Chipset                 String?   @db.NVarChar(Max)
+  CPU                     String?   @db.NVarChar(Max)
+  GPU                     String?   @db.NVarChar(Max)
+  InternalMemory          String?   @db.NVarChar(Max)
+  CardSlot                String?   @db.NVarChar(Max)
+  MemoryOthers            String?   @db.NVarChar(Max)
+  PrimaryCamera           String?   @db.NVarChar(Max)
+  PrimaryCameraFeatures   String?   @db.NVarChar(Max)
+  PrimaryCameraVideo      String?   @db.NVarChar(Max)
+  SecondaryCamera         String?   @db.NVarChar(Max)
+  SecondaryCameraFeatures String?   @db.NVarChar(Max)
+  SecondaryCameraVideo    String?   @db.NVarChar(Max)
+  CameraOther             String?   @db.NVarChar(Max)
+  Jack                    Boolean   @map("_3_5Jack")
+  Loudspeeker             String?   @db.NVarChar(Max)
+  SoundFeature            String?   @db.NVarChar(Max)
+  Bluetooth               String?   @db.NVarChar(Max)
+  GPS                     String?   @db.NVarChar(Max)
+  NFC                     String?   @db.NVarChar(Max)
+  Radio                   String?   @db.NVarChar(Max)
+  USB                     String?   @db.NVarChar(Max)
+  WLAN                    String?   @db.NVarChar(Max)
+  Sensors                 String?   @db.NVarChar(Max)
+  OtherFeatures           String?   @db.NVarChar(Max)
+  Battery                 String?   @db.NVarChar(Max)
+  Charging                String?   @db.NVarChar(Max)
+  Colors                  String?   @db.NVarChar(Max)
+}
+
+model DeviceOverview {
+  Id              Int       @id @default(autoincrement())
+  CreateDate      DateTime
+  CreateId        Int
+  ModifyDate      DateTime?
+  ModifyId        Int?
+  IsDeleted       Boolean
+  OS              String?   @db.NVarChar(Max)
+  InternalStorage String?   @db.NVarChar(Max)
+  DisplaySize     String?   @db.NVarChar(Max)
+  Chipset         String?   @db.NVarChar(Max)
+  DisplayPixels   String?   @db.NVarChar(Max)
+  Battery         String?   @db.NVarChar(Max)
+  DeviceId        Int
+  CameraPhoto     String?   @db.NVarChar(Max)
+  CameraVideo     String?   @db.NVarChar(Max)
+  CardSlot        String?   @db.NVarChar(Max)
+  DeviceUniqueId  String?   @db.NVarChar(Max)
+  Devices         Devices   @relation(fields: [DeviceId], references: [Id])
+}
+
+model DeviceRating {
+  Id         Int       @id @default(autoincrement())
+  CreateDate DateTime
+  CreateId   Int
+  ModifyDate DateTime?
+  ModifyId   Int?
+  IsDeleted  Boolean
+  Rating     Int
+  DeviceId   Int
+  Devices    Devices   @relation(fields: [DeviceId], references: [Id])
+}
+
+model Devices {
+  Id             Int              @id @default(autoincrement())
+  CreateDate     DateTime
+  CreateId       Int
+  ModifyDate     DateTime?
+  ModifyId       Int?
+  IsDeleted      Boolean
+  Name           String?          @db.NVarChar(Max)
+  UniqueId       String           @unique @db.NVarChar(450)
+  Image          String?          @db.NVarChar(Max)
+  Description    String?          @db.NVarChar(Max)
+  Position       Int
+  Price          Decimal          @db.Decimal(18, 2)
+  RAM            String?          @db.NVarChar(Max)
+  Network        String?          @db.NVarChar(Max)
+  IsLatest       Boolean
+  BrandId        Int
+  ExternalModel1 String?          @db.NVarChar(Max)
+  ExternalModel2 String?          @db.NVarChar(Max)
+  Brands         Brands           @relation(fields: [BrandId], references: [Id])
+  DeviceOverview DeviceOverview[]
+  DeviceRating   DeviceRating[]
+  UserReviews    UserReviews[]
+}
+
+model Persons {
+  Id         Int       @id @default(autoincrement())
+  CreateDate DateTime
+  CreateId   Int
+  ModifyDate DateTime?
+  ModifyId   Int?
+  IsDeleted  Boolean
+  FirstName  String?   @db.NVarChar(Max)
+  LastName   String?   @db.NVarChar(Max)
+  Email      String?   @db.NVarChar(Max)
+  Photo      String?   @db.NVarChar(Max)
+  Cnic       String?   @db.NVarChar(Max)
+  Address    String?   @db.NVarChar(Max)
+}
+
+model UserReviews {
+  Id          Int       @id @default(autoincrement())
+  CreateDate  DateTime
+  CreateId    Int
+  ModifyDate  DateTime?
+  ModifyId    Int?
+  IsDeleted   Boolean
+  Name        String?   @db.NVarChar(Max)
+  Description String?   @db.NVarChar(Max)
+  DeviceId    Int
+  Devices     Devices   @relation(fields: [DeviceId], references: [Id])
 }

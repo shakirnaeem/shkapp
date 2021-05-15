@@ -1,7 +1,7 @@
-const { PrismaClient } = require('@prisma/client')
+import { connectToDatabase } from "../../../util/mongodb";
 
 export default async function handler(req, res) {
-    const prisma = new PrismaClient()
+    //const prisma = new PrismaClient()
 
     // const resData = await fetch(`https://service.pakmobilezone.com/api/Brands`)
     // const dataAll = await resData.json()
@@ -21,6 +21,13 @@ export default async function handler(req, res) {
     //         }
     //     }
     // }    
-        const brands = await prisma.brand.findMany()
-        res.send(brands);   
+    //const brands = await prisma.brands.findMany()
+    const { db } = await connectToDatabase();
+    const brands = await db
+        .collection("brands")
+        .find({name: 'Apple'})
+        .sort({ metacritic: -1 })
+        .limit(20)
+        .toArray();
+    res.send(brands);
 }
