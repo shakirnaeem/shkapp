@@ -2,9 +2,17 @@ import { connectToDatabase } from "../../../util/mongodb";
 
 export default async function handler(req, res) {
     const { db } = await connectToDatabase();
+    const brandId = req.query['requestModel.brandId']
+    let filters = {
+        isDeleted: false
+    }
+    if (brandId) {
+        filters['brandId'] = Number(brandId)
+    }
+    console.log(filters);
     const devices = await db
         .collection("devices")
-        .find({ isDeleted: false, isLatest: true })
+        .find(filters)
         .sort({ metacritic: -1 })
         //.limit(20)
         .toArray();
