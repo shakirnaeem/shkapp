@@ -1,6 +1,8 @@
 import { connectToDatabase } from "../../../util/mongodb";
+import middleware from '../../../lib/init-middleware';
 
 export default async function handler(req, res) {
+    await middleware(req, res);
     const { db } = await connectToDatabase();
     const brandId = req.query['requestModel.brandId']
     let filters = {
