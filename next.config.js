@@ -1,11 +1,11 @@
 // next.config.js
 module.exports = {
-  async rewrites() {
-      return [
-        {
-          source: '/api/:path*',
-          destination: 'http://localhost:3000/:path*',
-        },
-      ]
-    },
-};
+    async rewrites() {
+        return [
+          {
+            source: '/api/:path*',
+            destination: 'https://service2.pakmobilezone.com/:path*',
+          },
+        ]
+      },
+  };
