@@ -14,6 +14,5 @@ export default async function handler(req, res) {
     // })
     const deleteUser = await prisma.brand.deleteMany()
     const users = await prisma.brand.findMany()
-    console.log(users);
     res.status(200).json({ firstName: 'Shakir', lastName: 'Naeem' });
 }

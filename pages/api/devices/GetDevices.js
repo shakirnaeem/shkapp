@@ -11,7 +11,6 @@ export default async function handler(req, res) {
     if (brandId) {
         filters['brandId'] = Number(brandId)
     }
-    console.log(filters);
     const devices = await db
         .collection("devices")
         .find(filters)
