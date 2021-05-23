@@ -1,6 +1,7 @@
 import { connectToDatabase } from "../util/mongodb";
 import Head from 'next/head'
 import Layout from '../components/Layout/Layout'
+import Image from 'next/image'
 
 export default function Home(props) {
   console.log(props);
@@ -10,7 +11,8 @@ export default function Home(props) {
     latestDevicesList = props.latestDevices.map(function (item, i) {
       return <div className="col-md-2 mb-2" key={i}>
         <div className="border text-center rounded pt-3">
-          <img src="a51thumb.jpg" width="75" height="100" />
+          <Image src="/images/a51thumb.jpg" width={75} height={100} />
+          {/* <img src="a51thumb.jpg" width="75" height="100" /> */}
           <div className="mt-3">
             {`${item.brandName} ${item.name}`}
             <h5><span className="badge badge-danger mt-1">{item.price}</span></h5>
