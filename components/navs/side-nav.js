@@ -8,31 +8,6 @@ export default function SideNav(props) {
         <div className="side-nav-head first mt-4">Brands</div>
         <ul className="list-group">
             <BrandList brands={props.brands}></BrandList>
-            {/* <li className="list-group-item"><a href="devices.html" className="text-white">Realme <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">QMobile <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Oppo <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">OnePlus <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Nokia <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Motorola <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Samsung <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Xiaomi <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Vivo <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Tecno <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Sony Ericsson <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a>
-            </li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Sony <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Asus <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Apple <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Meizu <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">LG <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Lenovo <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Microsoft <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Huawei <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">HTC <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Honor <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Haier <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Google <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
-            <li className="list-group-item"><a href="devices.html" className="text-white">Infinix <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li> */}
         </ul>
         <div className="side-nav-head">Network</div>
         <ul className="list-group">
