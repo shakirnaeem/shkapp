@@ -36,7 +36,7 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-    const res = await fetch(`http://localhost:3000/api/devices/GetBrandDevices?brandId=${context.params.id}`)
+    const res = await fetch(`https://service2.pakmobilezone.com/api/devices/GetBrandDevices?brandId=${context.params.id}`)
     const brandDevices = await res.json();
 
     return {

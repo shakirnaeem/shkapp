@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
 MyApp.getInitialProps = async (appContext) => {
     // calls page's `getInitialProps` and fills `appProps.pageProps`
     const appProps = await App.getInitialProps(appContext);
-    const res = await fetch(`http://localhost:3000/api/brands/GetBrands`)
+    const res = await fetch(`https://service2.pakmobilezone.com/api/brands/GetBrands`)
     const brands = await res.json();
     appProps.pageProps = { brands }
     return { ...appProps }
