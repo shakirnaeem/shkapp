@@ -1,6 +1,6 @@
-import { connectToDatabase } from "../util/mongodb";
+import { connectToDatabase } from "../../util/mongodb";
 import Head from 'next/head'
-import Layout from '../components/Layout/Layout'
+import Layout from '../../components/Layout/Layout'
 import Image from 'next/image'
 
 export default function Home(props) {
