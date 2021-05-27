@@ -1,3 +1,4 @@
+import App from "next/app"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
 
@@ -9,12 +10,14 @@ function MyApp({ Component, pageProps }) {
 // every single page in your application. This disables the ability to
 // perform automatic static optimization, causing every page in your app to
 // be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-//
-//   return { ...appProps }
-// }
+
+MyApp.getInitialProps = async (appContext) => {
+    // calls page's `getInitialProps` and fills `appProps.pageProps`
+    const appProps = await App.getInitialProps(appContext);
+    const res = await fetch(`http://localhost:3000/api/brands/GetBrands`)
+    const brands = await res.json();
+    appProps.pageProps = { brands }
+    return { ...appProps }
+}
 
 export default MyApp
