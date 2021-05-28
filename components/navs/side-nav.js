@@ -7,7 +7,7 @@ export default function SideNav(props) {
         <i className="closenav fa fa-close d-lg-none d-md-none"></i>
         <div className="side-nav-head first mt-4">Brands</div>
         <ul className="list-group">
-            {/* <BrandList brands={props.brands}></BrandList> */}
+            <BrandList brands={props.brands}></BrandList>
         </ul>
         <div className="side-nav-head">Network</div>
         <ul className="list-group">

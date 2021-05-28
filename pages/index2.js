@@ -1,6 +1,6 @@
-import { connectToDatabase } from "../../util/mongodb";
+import { connectToDatabase } from "../util/mongodb";
 import Head from 'next/head'
-import Layout from '../../components/Layout/Layout'
+import Layout from '../components/Layout/Layout'
 import Image from 'next/image'
 
 export default function Home(props) {
@@ -50,29 +50,35 @@ export default function Home(props) {
   )
 }
 
-export async function getStaticProps(context) {
+// export async function getServerSideProps(context) {
 
-  const { db } = await connectToDatabase();
-  let brandsData = await db
-    .collection("brands")
-    .find({ isDeleted: false })
-    .project({ _id: 0, id: 1, name: 1, isPopular: 1 })
-    .sort({ metacritic: -1 })
-    //.limit(20)
-    .toArray();
+//   // const res = await fetch(`https://service2.pakmobilezone.com/api/brands/GetPopularBrands`)
+//   // const popularBrands = await res.json();
+  
+//   // const dres = await fetch(`https://service2.pakmobilezone.com/api/devices/GetLatestDevices`)
+//   // const latestDevices = await dres.json();
 
-  const popularBrands = brandsData.filter(x => x.isPopular == true).map(x => { return { id: x.id, name: x.name } });
-  const brands = brandsData.map(x => { return { id: x.id, name: x.name } });
+//   // const { db } = await connectToDatabase();
+//   // let brandsData = await db
+//   //   .collection("brands")
+//   //   .find({ isDeleted: false })
+//   //   .project({ _id: 0, id: 1, name: 1, isPopular: 1 })
+//   //   .sort({ metacritic: -1 })
+//   //   //.limit(20)
+//   //   .toArray();
 
-  const latestDevices = await db
-    .collection("devices")
-    .find({ isDeleted: false, isLatest: true })
-    .project({ _id: 0, id: 1, brandName: 1, name: 1, price: 1, uniqueId: 1 })
-    .sort({ metacritic: -1 })
-    //.limit(20)
-    .toArray();
+//   // const popularBrands = brandsData.filter(x => x.isPopular == true).map(x => { return { id: x.id, name: x.name } });
+//   // const brands = brandsData.map(x => { return { id: x.id, name: x.name } });
 
-  return {
-    props: { brands, popularBrands, latestDevices }, // will be passed to the page component as props
-  }
-}
+//   // const latestDevices = await db
+//   //   .collection("devices")
+//   //   .find({ isDeleted: false, isLatest: true })
+//   //   .project({ _id: 0, id: 1, brandName: 1, name: 1, price: 1, uniqueId: 1 })
+//   //   .sort({ metacritic: -1 })
+//   //   //.limit(20)
+//   //   .toArray();
+
+//   return {
+//     props: {},//{ popularBrands, latestDevices }, // will be passed to the page component as props
+//   }
+// }
