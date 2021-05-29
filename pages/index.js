@@ -38,7 +38,7 @@ export default function Home(props) {
       <div className="col-md-10 col-sm-12 col-xs-12 float-right main">
         <h4 className="ml-3 mr-3 border-bottom pb-2 mt-3">Latest Mobiles</h4>
         <div className="row m-0">
-          {/* {latestDevicesList} */}
+          {latestDevicesList}
         </div>
         <h4 className="ml-3 mr-3 border-bottom pb-2 mt-3">Popular Brands</h4>
         <div className="row m-0">
@@ -50,10 +50,10 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-    const res = await fetch(`https://service2.pakmobilezone.com/api/brands/GetPopularBrands`)
+    const res = await fetch(`http://localhost:3000/api/brands/GetPopularBrands`)
     const popularBrands = await res.json();
 
-    const dres = await fetch(`https://service2.pakmobilezone.com/api/devices/GetLatestDevices`)
+    const dres = await fetch(`http://localhost:3000/api/devices/GetLatestDevices`)
     const latestDevices = await dres.json();
 
     return {
