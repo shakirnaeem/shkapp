@@ -42,7 +42,7 @@ export default function Home(props) {
         </div>
         <h4 className="ml-3 mr-3 border-bottom pb-2 mt-3">Popular Brands</h4>
         <div className="row m-0">
-          {/* {popularBrandList} */}
+          {popularBrandList}
         </div>
       </div>
     </Layout>
