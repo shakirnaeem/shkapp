@@ -50,10 +50,10 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-    const res = await fetch(`http://localhost:3000/api/brands/GetPopularBrands`)
+    const res = await fetch(`https://shkapp-97p78sv3a-shakirnaeem.vercel.app/api/brands/GetPopularBrands`)
     const popularBrands = await res.json();
 
-    const dres = await fetch(`http://localhost:3000/api/devices/GetLatestDevices`)
+    const dres = await fetch(`https://shkapp-97p78sv3a-shakirnaeem.vercel.app/api/devices/GetLatestDevices`)
     const latestDevices = await dres.json();
 
     return {
