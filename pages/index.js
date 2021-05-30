@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Layout from '../components/Layout/Layout'
 import Image from 'next/image'
+const { API_URI } = process.env
 
 export default function Home(props) {
   let popularBrandList = [];
@@ -50,10 +51,10 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-    const res = await fetch(`https://shkapp.vercel.app/api/brands/GetPopularBrands`)
+    const res = await fetch(`${API_URI}brands/GetPopularBrands`)
     const popularBrands = await res.json();
 
-    const dres = await fetch(`https://shkapp.vercel.app/api/devices/GetLatestDevices`)
+    const dres = await fetch(`${API_URI}devices/GetLatestDevices`)
     const latestDevices = await dres.json();
 
     return {
