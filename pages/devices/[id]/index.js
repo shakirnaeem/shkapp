@@ -4,6 +4,8 @@ import Image from 'next/image'
 const { API_URI } = process.env
 import { useRouter } from 'next/router'
 import CommonService from '../../../util/common-service'
+import pageModel from '../../../models/page-model'
+import Pagination from "react-js-pagination";
 
 export default function Home(props) {
     let brandDevicesList = [];
@@ -12,8 +14,8 @@ export default function Home(props) {
     let urlParams = CommonService.decodeParams(id);
     let seperatedParams = urlParams.split('|$|');
     const brandName = seperatedParams[1];
-    if (props.brandDevices instanceof Array) {
-        brandDevicesList = props.brandDevices.map(function (item, i) {
+    if (props.data.brandDevices instanceof Array) {
+        brandDevicesList = props.data.brandDevices.map(function (item, i) {
             return <div className="col-md-2 mb-2" key={i}>
                 <div className="border text-center rounded pt-3">
                     <Image src="/images/a51thumb.jpg" width={75} height={100} />
@@ -31,6 +33,10 @@ export default function Home(props) {
         })
     }
 
+    function changePage(page) {
+        router.push('?page=' + page)
+    }
+
     return (
         <Layout brands={props.brands}>
             <div className="col-md-10 col-sm-12 col-xs-12 float-right main">
@@ -38,19 +44,39 @@ export default function Home(props) {
                 <div className="row m-0">
                     {brandDevicesList}
                 </div>
+                <div className="row m-0">
+                    <div className="col-md-12">
+                        <Pagination innerClass="pagination float-right"
+                            itemClass="page-item"
+                            linkClass="page-link"
+                            activePage={props.page}
+                            itemsCountPerPage={props.pageSize}
+                            totalItemsCount={props.data.totalCount}
+                            pageRangeDisplayed={5}
+                            onChange={changePage}
+                        />
+                    </div>
+                </div>
             </div>
         </Layout>
     )
 }
 
 export async function getServerSideProps(context) {
+    if (context.query.page) {
+        pageModel.Page = context.query.page
+    }
+    else{
+        pageModel.Page = 1;
+    }
+    const queryParam = CommonService.toQueryString(pageModel)
     let urlParams = CommonService.decodeParams(context.params.id);
     let seperatedParams = urlParams.split('|$|');
     const brandId = seperatedParams[0];
-    const res = await fetch(`${API_URI}devices/GetBrandDevices?brandId=${brandId}`)
-    const brandDevices = await res.json();
+    const res = await fetch(`${API_URI}devices/GetBrandDevices?brandId=${brandId}&${queryParam}`)
+    const data = await res.json();
 
     return {
-        props: { brandDevices },
+        props: { data, page: Number(pageModel.Page), pageSize: pageModel.PageSize },
     }
 }
