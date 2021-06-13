@@ -17,7 +17,7 @@ export default function Home(props) {
     if (props.data.brandDevices instanceof Array) {
         brandDevicesList = props.data.brandDevices.map(function (item, i) {
             return <div className="col-md-2 mb-2" key={i}>
-                <div className="border text-center rounded pt-3">
+                <div className="border text-center rounded pt-3" onClick={x => gotoDeviceDetail(item.id)}>
                     <Image src="/images/a51thumb.jpg" width={75} height={100} />
                     <div className="mt-3">
                         {`${item.brandName} ${item.name}`}
@@ -35,6 +35,12 @@ export default function Home(props) {
 
     function changePage(page) {
         router.push('?page=' + page)
+    }
+
+    function gotoDeviceDetail(id) {
+        let queryParam = CommonService.encodeParams(`${id}`);
+        const linkAddress = `/device-detail/${queryParam}`;
+        router.push(linkAddress)
     }
 
     return (
@@ -66,7 +72,7 @@ export async function getServerSideProps(context) {
     if (context.query.page) {
         pageModel.Page = context.query.page
     }
-    else{
+    else {
         pageModel.Page = 1;
     }
     const queryParam = CommonService.toQueryString(pageModel)
