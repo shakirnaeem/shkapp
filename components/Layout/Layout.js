@@ -6,7 +6,7 @@ export default function Layout({ children, ...pageProps }) {
     const [toggleSideNav, setToggleSideNav] = useState(false)
     return <>
         <TopNav toggleSideNav={toggleSideNav} setToggleSideNav={setToggleSideNav}></TopNav>
-        <SideNav toggleSideNav={toggleSideNav} brands={pageProps.brands}></SideNav>
+        <SideNav toggleSideNav={toggleSideNav} setToggleSideNav={setToggleSideNav} brands={pageProps.brands}></SideNav>
         {children}
     </>
 }
