@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import BrandList from '../brands/brands-list'
 
 export default function SideNav(props) {
-    return <div id="app-side-nav" className="sidenav col-md-2 col-6 ml-1 d-lg-block d-md-block d-sm-none d-none rounded">
+    let toggleSideNavClass = props.toggleSideNav ? '' : ' d-none d-sm-none'
+    return <div id="app-side-nav" className={`sidenav col-md-2 col-6 ml-1 d-lg-block d-md-block rounded${toggleSideNavClass}`}>
         <i className="closenav fa fa-close d-lg-none d-md-none"></i>
         <div className="side-nav-head first mt-4">Brands</div>
         <ul className="list-group">
