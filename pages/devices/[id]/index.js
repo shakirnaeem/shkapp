@@ -16,8 +16,8 @@ export default function Home(props) {
     const brandName = seperatedParams[1];
     if (props.data.brandDevices instanceof Array) {
         brandDevicesList = props.data.brandDevices.map(function (item, i) {
-            return <div className="col-md-2 mb-2" key={i}>
-                <div className="border text-center rounded pt-3" onClick={x => gotoDeviceDetail(item.id)}>
+            return <div className="col-md-2 mb-2 cursor-pointer" key={i}>
+                <div className="border text-center rounded pt-3" onClick={x => gotoDeviceDetail(item.uniqueId)}>
                     <Image src="/images/a51thumb.jpg" width={75} height={100} />
                     <div className="mt-3">
                         {`${item.brandName} ${item.name}`}
@@ -38,7 +38,7 @@ export default function Home(props) {
     }
 
     function gotoDeviceDetail(id) {
-        let queryParam = CommonService.encodeParams(`${id}`);
+        let queryParam = CommonService.encodeParams(`${id}|$|${brandName}`);
         const linkAddress = `/device-detail/${queryParam}`;
         router.push(linkAddress)
     }

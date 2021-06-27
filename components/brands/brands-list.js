@@ -11,7 +11,7 @@ export default function BrandList({ brands, setToggleSideNav }) {
         brandList = brands.map(function (item, i) {
             let queryParam = CommonService.encodeParams(`${item.id}|$|${item.name}|$||$||$|`);
             const linkAddress = `/devices/${queryParam}`;
-            return <li className="list-group-item" key={i}><a onClick={x => gotoDevice(linkAddress)} className="text-white">{item.name} <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
+            return <li className="list-group-item" key={i}><a onClick={x => gotoDevice(linkAddress)} className="text-white cursor-pointer">{item.name} <FontAwesomeIcon icon={faAngleRight} className="float-right" /></a></li>
         })
     }
 

@@ -6,6 +6,11 @@ import { useRouter } from 'next/router'
 import CommonService from '../../../util/common-service'
 
 export default function Home(props) {
+    const router = useRouter()
+    const { id } = router.query
+    let urlParams = CommonService.decodeParams(id);
+    let seperatedParams = urlParams.split('|$|');
+    const brandName = seperatedParams[1];
     return (
         <Layout brands={props.brands}>
             <div className="col-md-10 col-sm-12 col-xs-12 float-right main">
@@ -14,124 +19,190 @@ export default function Home(props) {
                         <Image src="/images/a51.jpg" width={160} height={212} />
                     </div>
                     <div className="col-md-9">
-                        <h5 className="border-bottom pb-2 text-lg-left text-center">Samsung Galaxy A71</h5>
+                        <h5 className="border-bottom pb-2 text-lg-left text-center">{brandName} {props.deviceDetail.Name}</h5>
                         <div className="row">
                             <div className="col-md-3 col-6 mb-2">
                                 <div className="text-danger"><strong><i className="fa fa-tv mr-1"></i>Display</strong></div>
-                                <div>6.7 Inches</div>
+                                <div>{props.deviceDetail.OverviewDisplaySize}</div>
                             </div>
                             <div className="col-md-3 col-6 mb-2">
                                 <div className="text-danger"><strong><i className="fa fa-camera mr-1"></i>Camera</strong></div>
-                                <div>64 MP</div>
+                                <div>{props.deviceDetail.OverviewCameraPhoto}</div>
                             </div>
-                            <div className="col-md-3 col-6 mb-2 mr-md-4">
-                                <div className="text-danger"><strong><i className="fa fa-microchip mr-1"></i>Processor</strong></div>
-                                <div>Qualcomm SDM730 Snapdragon 730 (8 nm) - GlobalQualcomm SDM730 Snapdragon 730G (8 nm) - Philippines</div>
-                            </div>
+                        </div>
+                        <div className="row">
                             <div className="col-md-3 col-6 mb-2">
                                 <div className="text-danger"><strong><i className="fa fa-database mr-1"></i>Storage</strong></div>
-                                <div>128 GB</div>
+                                <div>{props.deviceDetail.OverviewInternalStorage}</div>
                             </div>
                             <div className="col-md-3 col-6 mb-2">
                                 <div className="text-danger"><strong><i className="fa fa-battery-three-quarters mr-1"></i>Battery</strong></div>
-                                <div>Li-Ion 4500 mAh, non-removable</div>
-                            </div>
-                            <div className="col-md-3 col-6 mb-2">
-                                <div className="text-danger"><strong><i className="fa fa-android mr-1"></i>OS</strong></div>
-                                <div>Android 10, One UI 2.5</div>
+                                <div>{props.deviceDetail.OverviewBattery}</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="card col-md-10 col-12 p-0 ml-md-3 mb-3">
                     <div className="card-body">
-                        <h5 className="border-bottom pb-2">Network</h5>
+                        <h5 className="border-bottom pb-2 text-danger">Network</h5>
                         <div className="row">
                             <div className="col-4">2G Bands</div>
-                            <div className="col-8">GSM 850 / 900 / 1800 / 1900 - SIM 1 &amp; SIM 2 (dual-SIM model only)</div>
+                            <div className="col-8">{props.deviceDetail.Network2G}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">3G Bands</div>
-                            <div className="col-8">HSDPA 850 / 900 / 1900 / 2100</div>
+                            <div className="col-8">{props.deviceDetail.Network3G}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">4G Bands</div>
-                            <div className="col-8">1, 2, 3, 4, 5, 7, 8, 12, 13, 17, 20, 28, 38, 40, 41, 66</div>
+                            <div className="col-8">{props.deviceDetail.Network4G}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">5G Bands</div>
-                            <div className="col-8"></div>
+                            <div className="col-8">{props.deviceDetail.Network5G}</div>
                         </div>
                     </div>
                 </div>
                 <div className="card col-md-10 col-12 p-0 ml-md-3 mb-3">
                     <div className="card-body">
-                        <h5 className="border-bottom pb-2">Design</h5>
+                        <h5 className="border-bottom pb-2 text-danger">Design</h5>
                         <div className="row">
                             <div className="col-4">Dimensions</div>
-                            <div className="col-8">163.6 x 76 x 7.7 mm (6.44 x 2.99 x 0.30 in)</div>
+                            <div className="col-8">{props.deviceDetail.Dimensions}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">Weight</div>
-                            <div className="col-8">179 g (6.31 oz)</div>
+                            <div className="col-8">{props.deviceDetail.Weight}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">Build</div>
-                            <div className="col-8">Glass front (Gorilla Glass 3), plastic back, plastic frame</div>
+                            <div className="col-8">{props.deviceDetail.Build}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">Sim</div>
-                            <div className="col-8">Single SIM (Nano-SIM) or Dual SIM (Nano-SIM, dual stand-by)</div>
+                            <div className="col-8">{props.deviceDetail.SimSituation}</div>
                         </div>
                     </div>
                 </div>
                 <div className="card col-md-10 col-12 p-0 ml-md-3 mb-3">
                     <div className="card-body">
-                        <h5 className="border-bottom pb-2">Display</h5>
+                        <h5 className="border-bottom pb-2 text-danger">Display</h5>
                         <div className="row">
                             <div className="col-4">Size</div>
-                            <div className="col-8">6.7 inches, 108.4 cm (~87.2% screen-to-body ratio)</div>
+                            <div className="col-8">{props.deviceDetail.DisplaySize}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">Resolution</div>
-                            <div className="col-8">1080 x 2400 pixels, 20:9 ratio (~393 ppi density)</div>
+                            <div className="col-8">{props.deviceDetail.Resolution}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">Technology</div>
-                            <div className="col-8">Super AMOLED Plus</div>
+                            <div className="col-8">{props.deviceDetail.DisplayType}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">Protection</div>
-                            <div className="col-8">Corning Gorilla Glass 3</div>
+                            <div className="col-8">{props.deviceDetail.DisplayProtection}</div>
                         </div>
                     </div>
                 </div>
                 <div className="card col-md-10 col-12 p-0 ml-md-3 mb-3">
                     <div className="card-body">
-                        <h5 className="border-bottom pb-2">Hardware and Performance</h5>
+                        <h5 className="border-bottom pb-2 text-danger">Hardware and Performance</h5>
                         <div className="row">
                             <div className="col-4">System Chip</div>
-                            <div className="col-8">Qualcomm SDM730 Snapdragon 730 (8 nm) - GlobalQualcomm SDM730 Snapdragon 730G (8 nm) - Philippines</div>
+                            <div className="col-8">{props.deviceDetail.Chipset}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">Processor</div>
-                            <div className="col-8">Octa-core (2x2.2 GHz Kryo 470 Gold &amp; 6x1.8 GHz Kryo 470 Silver)</div>
+                            <div className="col-8">{props.deviceDetail.CPU}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">GPU</div>
-                            <div className="col-8">Adreno 618</div>
+                            <div className="col-8">{props.deviceDetail.GPU}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">Storage</div>
-                            <div className="col-8">128GB 6GB RAM, 128GB 8GB RAM</div>
+                            <div className="col-8">{props.deviceDetail.InternalMemory}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">External Storage</div>
-                            <div className="col-8">microSDXC (dedicated slot)</div>
+                            <div className="col-8">{props.deviceDetail.CardSlot}</div>
                         </div>
                         <div className="row">
                             <div className="col-4">OS</div>
-                            <div className="col-8">Android 10, One UI 2.5</div>
+                            <div className="col-8">{props.deviceDetail.OS}</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="card col-md-10 col-12 p-0 ml-md-3 mb-3">
+                    <div className="card-body">
+                        <h5 className="border-bottom pb-2 text-danger">Camera</h5>
+                        <div className="row">
+                            <div className="col-4">Camera</div>
+                            <div className="col-8">{props.deviceDetail.PrimaryCamera}</div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4">Features</div>
+                            <div className="col-8">{props.deviceDetail.PrimaryCameraFeatures}</div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4">Video recording</div>
+                            <div className="col-8">{props.deviceDetail.PrimaryCameraVideo}</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="card col-md-10 col-12 p-0 ml-md-3 mb-3">
+                    <div className="card-body">
+                        <h5 className="border-bottom pb-2 text-danger">Selfie Camera</h5>
+                        <div className="row">
+                            <div className="col-4">Camera</div>
+                            <div className="col-8">{props.deviceDetail.SecondaryCamera}</div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4">Features</div>
+                            <div className="col-8">{props.deviceDetail.SecondaryCameraFeatures}</div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4">Video recording</div>
+                            <div className="col-8">{props.deviceDetail.SecondaryCameraVideo}</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="card col-md-10 col-12 p-0 ml-md-3 mb-3">
+                    <div className="card-body">
+                        <h5 className="border-bottom pb-2 text-danger">Connectivity</h5>
+                        <div className="row">
+                            <div className="col-4">Bluetooth</div>
+                            <div className="col-8">{props.deviceDetail.Bluetooth}</div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4">GPS</div>
+                            <div className="col-8">{props.deviceDetail.GPS}</div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4">NFC</div>
+                            <div className="col-8">{props.deviceDetail.NFC}</div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4">Radio</div>
+                            <div className="col-8">{props.deviceDetail.Radio}</div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4">USB</div>
+                            <div className="col-8">{props.deviceDetail.USB}</div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4">WLAN</div>
+                            <div className="col-8">{props.deviceDetail.WLAN}</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="card col-md-10 col-12 p-0 ml-md-3 mb-3">
+                    <div className="card-body">
+                        <h5 className="border-bottom pb-2 text-danger">Battery</h5>
+                        <div className="row">
+                            <div className="col-4">Capacity</div>
+                            <div className="col-8">{props.deviceDetail.Battery}</div>
                         </div>
                     </div>
                 </div>
@@ -141,20 +212,14 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-    // if (context.query.page) {
-    //     pageModel.Page = context.query.page
-    // }
-    // else{
-    //     pageModel.Page = 1;
-    // }
-    // const queryParam = CommonService.toQueryString(pageModel)
-    // let urlParams = CommonService.decodeParams(context.params.id);
-    // let seperatedParams = urlParams.split('|$|');
-    // const brandId = seperatedParams[0];
-    // const res = await fetch(`${API_URI}devices/GetBrandDevices?brandId=${brandId}&${queryParam}`)
-    // const data = await res.json();
+    let urlParams = CommonService.decodeParams(context.params.id);
+    let seperatedParams = urlParams.split('|$|');
+    const uniqueId = seperatedParams[0];
+    const res = await fetch(`${API_URI}device-details/GetDeviceDetails?uniqueId=${uniqueId}`)
+    const data = await res.json();
+    console.log(data)
 
     return {
-        props: {},
+        props: { deviceDetail: data },
     }
 }
